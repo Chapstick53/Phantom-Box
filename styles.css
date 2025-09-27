@@ -1,0 +1,71 @@
+/* Base font */
+body { font-family: 'Inter', sans-serif; }
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Value cells: cyan + copy cursor */
+.val-cell {
+  color: #8be9fd;
+  cursor: pointer;
+  transition: color .2s ease;
+  word-break: break-word;
+}
+.val-cell:hover { color: #e8f9ff; }
+
+/* Download icon buttons */
+.dl-btn {
+  color: #9ca3af;
+  transition: color .2s ease, transform .1s ease;
+}
+.dl-btn:hover { color: #67e8f9; transform: translateY(-1px); }
+
+/* Toast (bottom-right) */
+.toast {
+  position: fixed;
+  right: 1.25rem; /* 20px */
+  bottom: 1.25rem;
+  background: rgba(17, 24, 39, 0.95); /* gray-900 */
+  color: #fff;
+  padding: .6rem .9rem;
+  border-radius: .6rem;
+  font-size: .9rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+  z-index: 60;
+  animation: fadeIn .15s ease-out;
+}
+
+/* Simple fade for toast */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#mailList {
+  max-height: 20rem;   /* ~320px, tweak as needed */
+  overflow-y: auto;
+  scrollbar-width: thin;     /* Firefox */
+  scrollbar-color: #555 #222; /* Firefox */
+}
+
+/* Chrome/Edge/others */
+#mailList::-webkit-scrollbar {
+  width: 8px;
+}
+#mailList::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+#mailList::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+#mailList::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+/* Make the mailList and phoneBox scrollable while keeping box size */
+#mailList { overflow-y: auto; max-height: 420px; }
+#phoneBox { overflow-y: auto; max-height: 420px; }

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Temporary Login Credentials</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="bg-gradient-to-br from-purple-900 via-gray-900 to-black text-gray-100 min-h-screen">
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 glass shadow-lg flex justify-between items-center px-6 py-3">
+    <h1 class="text-lg font-bold tracking-wide">⚡ Temporary Login Credentials</h1>
+    <div class="flex gap-3">
+      <button id="copyAllBtn" class="glass px-3 py-2 rounded-lg hover:scale-105 transition">📋 Copy All</button>
+    </div>
+  </header>
+
+  <!-- Content: stacked like your wireframe -->
+  <main class="max-w-5xl mx-auto p-6">
+    <!-- Generate -->
+    <div class="w-full flex justify-center">
+      <button id="generateBtn"
+        class="px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-pink-500 to-purple-500 hover:scale-105 transition shadow-lg">
+        ✨ Generate Credentials
+      </button>
+    </div>
+
+    <!-- Profile Box (full width) -->
+    <section class="mt-6">
+      <div class="glass p-8 rounded-2xl shadow-xl flex flex-col items-center w-full min-h-[550px]">
+
+        <!-- Avatar -->
+        <div class="flex flex-col items-center mb-6">
+          <img id="profilePic" class="w-36 h-36 rounded-full border-2 border-purple-400 shadow-lg object-cover"
+               src="https://via.placeholder.com/150" alt="avatar" />
+          <button id="downloadImgBtn" class="mt-3 text-gray-300 hover:text-pink-400 text-sm">⬇️ Download Image</button>
+        </div>
+
+        <!-- Intro (shown before generation) -->
+        <div id="profileIntro" class="text-gray-400 text-center">
+          <p class="text-lg font-semibold">⚡ Generate Temporary Credentials</p>
+          <p class="text-sm mt-2">This tool creates disposable identities with name, email, password, phone, and OTP simulation for testing logins.</p>
+        </div>
+        
+
+        <!-- Table (hidden until generated) -->
+        <div id="profileTableWrap" class="w-full hidden">
+          <table class="w-full text-left border-separate border-spacing-y-3">
+            <tbody>
+              <tr>
+                <td class="font-semibold w-1/4">Full Name:</td>
+                <td id="fullname" class="val-cell" data-field="fullname">-</td>
+                <td class="text-right">
+                  <button class="dl-btn" data-target="fullname" title="Download">⬇️</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="font-semibold">Username:</td>
+                <td id="username" class="val-cell" data-field="username">-</td>
+                <td class="text-right">
+                  <button class="dl-btn" data-target="username" title="Download">⬇️</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="font-semibold">Email:</td>
+                <td id="email" class="val-cell" data-field="email">-</td>
+                <td class="text-right">
+                  <button class="dl-btn" data-target="email" title="Download">⬇️</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="font-semibold">Password:</td>
+                <td id="password" class="val-cell" data-field="password">-</td>
+                <td class="text-right">
+                  <button class="dl-btn" data-target="password" title="Download">⬇️</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="font-semibold">Phone:</td>
+                <td id="phone" class="val-cell" data-field="phone">-</td>
+                <td class="text-right">
+                  <button class="dl-btn" data-target="phone" title="Download">⬇️</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="font-semibold">DOB:</td>
+                <td id="dob" class="val-cell" data-field="dob">-</td>
+                <td class="text-right">
+                  <button class="dl-btn" data-target="dob" title="Download">⬇️</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="font-semibold">Address:</td>
+                <td id="address" class="val-cell" data-field="address">-</td>
+                <td class="text-right">
+                  <button class="dl-btn" data-target="address" title="Download">⬇️</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Row: Mail (wide) + Phone (narrow vertical) -->
+    <section class="mt-8 grid grid-cols-3 gap-6 items-stretch">
+      <!-- Mailbox -->
+      <div class="glass p-6 rounded-2xl shadow-xl col-span-2 flex flex-col min-h-[320px]">
+        <h2 class="text-lg font-semibold mb-4">📧 Mail Box</h2>
+        <div id="mailList" 
+        class="rounded-xl overflow-y-auto border border-gray-800 flex-1 max-h-80">
+          <!-- Empty state -->
+          <div id="mailEmpty" class="flex flex-col items-center justify-center h-full text-gray-400 py-10">
+            <div class="w-16 h-16 mb-4 rounded-full bg-gray-200/10 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-9 4l9-6M3 8l9 6 9-6"/>
+              </svg>
+            </div>
+            <p class="font-semibold text-gray-300">Your inbox is empty</p>
+            <p class="text-sm text-gray-500">Waiting for incoming emails…</p>
+          </div>
+        </div>
+        <div id="mailDetail" class="hidden mt-6 rounded-xl border border-gray-800 overflow-hidden">
+          <div class="flex items-center justify-between bg-gray-900 px-4 py-3">
+            <button id="backToList" class="text-sm font-semibold hover:opacity-80">← BACK TO LIST</button>
+          </div>
+          <div class="bg-white/5 p-5">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-3">
+                <div id="mdAvatar" class="w-10 h-10 rounded-full bg-gray-300 text-gray-800 grid place-items-center font-semibold"></div>
+                <div>
+                  <div id="mdSender" class="font-semibold"></div>
+                  <div id="mdEmail" class="text-sm text-gray-300"></div>
+                </div>
+              </div>
+              <div class="text-sm text-gray-300">
+                <span class="mr-2">Date:</span><span id="mdDate"></span>
+              </div>
+            </div>
+        
+            <hr class="my-4 border-gray-800" />
+            <div class="text-sm text-gray-300 mb-2">Subject:</div>
+            <div id="mdSubject" class="mb-4 font-semibold"></div>
+            <div id="mdBody" class="min-h-[120px] whitespace-pre-wrap"></div>
+          </div>
+        </div>
+        
+
+      </div>
+    
+      <!-- Phone -->
+      <div class="glass p-6 rounded-2xl shadow-xl col-span-1 flex flex-col min-h-[320px]">
+        <div class="flex justify-between items-center mb-3">
+          <h2 class="text-lg font-semibold">📱 Phone</h2>
+          <span id="phoneNumberTop" class="text-sm text-gray-300">+91-XXXXXXX</span>
+        </div>
+        <div id="phoneBox" class="flex-1 space-y-3 text-gray-200 overflow-y-auto pr-1">
+          <!-- Empty state -->
+          <div id="phoneEmpty" class="flex flex-col items-center justify-center h-full text-gray-400 py-10">
+            <div class="w-14 h-14 mb-3 rounded-xl bg-gray-200/10 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3 5h2l1 7h13l1-7h2M5 5h14M10 12h4"/>
+              </svg>
+            </div>
+            <p class="font-semibold text-gray-300">No OTP yet</p>
+            <p class="text-sm text-gray-500">Generate credentials to simulate an SMS OTP</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden">✅ Copied to clipboard</div>
+
+  <!-- App JS -->
+  <script src="index.js"></script>
+</body>
+</html>
